@@ -1,0 +1,92 @@
+body {
+  font-family: "Plus Jakarta Sans", sans-serif !important; 
+  font-optical-sizing: auto !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+}
+
+.navbar{
+    height:5rem;
+    background-color: white;
+}
+
+.fa-suitcase-rolling{
+    color:aqua;
+    font-size: 2rem;
+}
+.nav-link{
+    color:#222 !important;
+}
+.logo{
+    height: 75px;
+    width:75px ;
+}
+
+/* foooter */
+
+.links a {
+    text-decoration: none;
+    color:#222222;
+}
+
+.links a:hover{
+    text-decoration: underline;   
+}
+
+.f-info{
+    display:flex;
+    background-color:#ebebeb;
+    height:8rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+    text-align: center;
+}
+
+
+.social i{
+    margin-right:1rem;
+    font-size: 1.3rem;
+}
+.links,.social,.brand{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* card */
+
+.card{
+    border:none !important;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    
+}
+
+.card-img-top{
+border-radius: 1rem !important;
+width :100% !important;
+object-fit: cover !important; 
+}
+.card-body{
+    padding:0 !important;
+}
+.card-text{
+    font-weight: 300 !important;
+}
+.listing-link{
+    text-decoration: none;
+} 
+
+/* card effect */
+.cd{
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.cd:hover{
+    transform:scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+} 
+

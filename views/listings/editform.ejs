@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RentNRest</title>
+</head>
+
+<body>
+    <h3>edit listings</h3>
+    <form method="post" action="/listings/<%=list._id%>?_method=PUT">
+
+        <label for="title">
+        <input type="text" name="listing[title]" value="<%=list.title%>">
+        <br><br>
+        <textarea name="listing[description]" cols="30" rows="10"><%=list.description%></textarea>
+        <br><br>
+        <input type="text" name="listing[image]" value="<%=list.image%>">
+        <br><br>
+        <input type="number" name="listing[price]" value="<%=list.price%>">
+        <br><br>
+        <input type="text" name="listing[country]" value="<%=list.country%>">
+        <br><br>
+        <input type="text" name="listing[location]" value="<%=list.location%>">
+        <br><br>
+        <button>Edit</button>
+
+    </form>
+
+</body>
+
+</html>
