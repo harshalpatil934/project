@@ -9,9 +9,9 @@ const listingSchema=new Schema({
     description:String,
     image:{
         type:String,
-        default:"https://media.istockphoto.com/id/2157290923/photo/happy-travelers-examining-map-while-enjoying-in-a-walk-through-the-town.jpg?s=1024x1024&w=is&k=20&c=4im_Nse6Fg2IfndeBzOQIZejR8w7-IA1vtK_f-um1Fg=",
+        default:"https://media.istockphoto.com/id/2155498743/photo/traveler-holding-orange-suitcase-on-city-street.jpg?s=1024x1024&w=is&k=20&c=w5UlYrQlGdljWx5wS1H1tW509a5bS7sC49FxsOvH8kM=",
         
-        set :(v)=> v===" " ? "https://media.istockphoto.com/id/2157290923/photo/happy-travelers-examining-map-while-enjoying-in-a-walk-through-the-town.jpg?s=1024x1024&w=is&k=20&c=4im_Nse6Fg2IfndeBzOQIZejR8w7-IA1vtK_f-um1Fg=" : v,
+        set :(v)=> v==="" ? "https://media.istockphoto.com/id/2155498743/photo/traveler-holding-orange-suitcase-on-city-street.jpg?s=1024x1024&w=is&k=20&c=w5UlYrQlGdljWx5wS1H1tW509a5bS7sC49FxsOvH8kM=" : v,
         
     },
     price:Number,
