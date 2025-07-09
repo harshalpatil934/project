@@ -63,7 +63,7 @@ body {
 
 /* card */
 
-.card{
+.list-card{
     border:none !important;
     margin-bottom: 2rem;
     margin-top: 2rem;
@@ -107,11 +107,11 @@ object-fit: cover !important;
 .btns{
     display: flex;
 }
-#del{
+/* #del{
     background-color: red !important;
     border-color: white !important;
     border: 2px;
     height: 38px;
     width: 74px !important;
-}
+} */
 
