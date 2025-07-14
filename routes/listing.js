@@ -1,5 +1,9 @@
 const express=require("express");
 const router=express.Router({mergeParams :true});
+const multer  = require('multer')
+const {storage}=require("../cloudcong.js");
+const upload = multer({ storage});
+
 
 const wrap=require("../util/wrap.js");
 
@@ -37,12 +41,17 @@ router.get("/:id",wrap(async (req,res)=>{
 }));
 
 //create route
-router.post("/",validateList ,isLoggedIn,wrap(async (req,res,next)=>{
+router.post("/",isLoggedIn, upload.single("listing[image]"),validateList ,wrap(async (req,res,next)=>{
+          let url =req.file.path;
+          let filename=req.file.filename;
+
           const newListing=new listing(req.body.listing);
           newListing.owner=req.user._id;
+          newListing.image={url,filename};
           await newListing.save();
           req.flash("success","new listing created");
         res.redirect("/listings");
+       
  }));
 
 //edit
