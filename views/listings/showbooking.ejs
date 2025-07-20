@@ -1,0 +1,29 @@
+<% layout("layouts/boilerplate") %>
+<div class="container mt-4">
+  <h2>Your Bookings</h2>
+  <% if (bookings.length === 0) { %>
+    <p>You have no bookings yet.</p>
+  <% } else { %>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Listing</th>
+          <th>Check-In</th>
+          <th>Check-Out</th>
+          <th>Total Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% bookings.forEach(booking => { %>
+          <tr>
+            <td><%= booking.listing.title %></td>
+            <td><%= booking.checkIn.toDateString() %></td>
+            <td><%= booking.checkOut.toDateString() %></td>
+            <td>₹<%= booking.totalPrice %></td>
+            <td><form method="post" action="/cancel/<%=booking._id%>?_method=DELETE"><button class="btn btn-link">cancel</button></form></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+</div>

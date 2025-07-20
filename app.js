@@ -16,6 +16,10 @@ const flash=require("connect-flash");
 const passport=require("passport");
 const LocalStrategy=require("passport-local");
 const User=require("./models/user.js");
+const listing=require("./models/listing.js");
+const Booking = require("./models/Booking.js");
+
+const wrap=require("./util/wrap.js");
 
 
 
@@ -36,6 +40,7 @@ app.engine("ejs",ejsMate);
 
 const mongoose=require("mongoose");
 const review = require("./models/review.js");
+const { isLoggedIn } = require('./middleware.js');
 
 const mongo_url='mongodb://127.0.0.1:27017/RentNRest';
 
@@ -62,9 +67,9 @@ const sessionOption = {secret:"mysupercode",
     }
 };
 
-app.get("/",(req,res)=>{
-    res.send("recived");
-});
+// app.get("/",(req,res)=>{
+//     res.send("recived");
+// });
 
 app.use(session(sessionOption));
 app.use(flash());
@@ -99,17 +104,89 @@ app.use("/listings",listingsRouter);
 app.use("/listings/:id/reviews",reviewsRouter);
 app.use("/",userRouter);
 
+app.get("/privacy",(req,res)=>{
+  res.render("listings/privacy.ejs");
+})
 
-//use /:id for "*"
-// app.all("/:id",(req,res,next)=>{
-//     next(new ExpressError(404,"page not exist"));
-// });
+app.get("/terms",(req,res)=>{
+  res.render("listings/terms.ejs");
+})
 
-// app.use((err,req,res,next)=>{
-//     let{statuscode =501,message="some thing went wrong"}=err;
-//     // res.status(statuscode).send(message);
-//     res.render("err.ejs",{statuscode,message});
-// });
+app.get("/rent&rest",(req,res)=>{
+  res.render("listings/rent&rest.ejs");
+})
+app.get("/beach",async (req,res)=>{
+let allListings=await listing.find({category:"beach"});
+res.render("listings/index.ejs",{allListings});
+});
+
+app.get("/forest",async (req,res)=>{
+let allListings=await listing.find({category:"forest"});
+res.render("listings/index.ejs",{allListings});
+});
+
+app.get("/mountain",async (req,res)=>{
+let allListings=await listing.find({category:"mountain"});
+res.render("listings/index.ejs",{allListings});
+});
+
+app.get("/search",async (req,res)=>{
+ let {search} =req.query;
+let allListings=await listing.find({country:`${search}`});
+if(allListings==false){
+  res.render("listings/noresponse.ejs");
+
+}
+else{
+   res.render("listings/index.ejs",{allListings});
+}
+
+// console.log(search)
+// res.send("hi")
+});
+
+app.delete("/cancel/:id",isLoggedIn,wrap(async (req,res)=>{
+  let {id}=req.params;
+  const userid=res.locals.currUser._id;
+ deletedbooking= await Booking.findByIdAndDelete(id);
+console.log(deletedbooking)
+res.redirect(`/bookings/${userid}`);
+}));
+
+app.get("/owner/:ownerId", async (req, res) => {
+  try {
+    // Step 1: Find all listings owned by the host
+    const listings = await listing.find({ owner: req.params.ownerId });
+
+    // Step 2: Extract listing IDs
+    const listingIds = listings.map(listing => listing._id);
+
+    // Step 3: Find all bookings for those listings
+    const bookings = await Booking.find({ listing: { $in: listingIds } }).populate("listing user");
+
+    // Step 4: Render view
+    res.render("listings/ownerbooking", { bookings });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Failed to fetch bookings for host.");
+  }
+});
+    
+
+
+// use /:id for "*"
+app.all("/:id",(req,res,next)=>{
+    next(new ExpressError(404,"page not exist"));
+});
+
+app.use((err,req,res,next)=>{
+    let{statuscode =501,message="some thing went wrong"}=err;
+    // res.status(statuscode).send(message);
+    res.render("err.ejs",{statuscode,message});
+});
+
+
+
 
 app.listen(8080,()=>{
     console.log("listning");

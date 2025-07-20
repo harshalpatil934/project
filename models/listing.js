@@ -15,6 +15,10 @@ const listingSchema=new Schema({
     price:Number,
     location:String,
     country:String,
+    category:{
+        type:String,
+        enum:["mountain","beach","forest"],
+    },
     reviews:[
        { 
         type:Schema.Types.ObjectId,
@@ -25,6 +29,7 @@ const listingSchema=new Schema({
         type:Schema.Types.ObjectId,
         ref:"User"
     },
+    
 });
 
 //delete reviews when listing is deleted

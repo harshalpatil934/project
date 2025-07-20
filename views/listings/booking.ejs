@@ -1,0 +1,15 @@
+<% layout("layouts/boilerplate") %>
+<form class="container mt-4 card p-4 shadow" method="POST" action="/listings/:id/book">
+  <h4 class="mb-3">Book This Stay</h4>
+  <div class="mb-3">
+    <label class="form-label" for="checkIn">Check-In Date</label>
+    <input type="date" class="form-control" name="checkIn" id="checkIn" required />
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="checkOut">Check-Out Date</label>
+    <input type="date" class="form-control" name="checkOut" id="checkOut" required />
+  </div>
+  <input type="hidden" name="listingId" value="<%=list._id %>" />
+  <input type="hidden" name="userId" value="<%= user._id %>" />
+  <button type="submit" class="btn btn-primary w-100">Book Now</button>
+</form>

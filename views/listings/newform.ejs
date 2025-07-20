@@ -18,7 +18,7 @@
         </div >
         <div class="mb-3">
         <label for="image" class="form-label">upload image</label>
-        <input type="file" name="listing[image]"  class="form-control" >
+        <input type="file" name="listing[image]"  class="form-control" required >
         </div>
         <div class="row">
         <div class="mb-3 col-md-4">
@@ -39,6 +39,17 @@
         <input type="text" name="listing[location]" placeholder="eneter location" class="form-control" required >
          <div class="invalid-feedback">Enter valid location</div>
          <div class="valid-feedback">seems okay</div>
+        </div>
+        <div>
+         <div class="mb-3"><label for="category">Choose a category:</label>
+            <select id="category" name="listing[category]">
+               <option value="mountain">mountains</option>
+                <option value="beach">beach</option>
+                 <option value="forest">forests</option>
+             </select>
+            
+         </div>
+            
         </div>
         
         <button class="btn btn-dark">Add</button>

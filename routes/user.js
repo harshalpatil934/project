@@ -6,6 +6,9 @@ const passport=require("passport");
 const LocalStrategy=require("passport-local");
 const {saveUrl}=require("../middleware.js");
 
+const Booking = require("../models/Booking.js");
+const Listing = require("../models/listing.js");
+
 
 router.get("/signup",(req,res)=>{
     res.render("user/signup.ejs");
@@ -50,5 +53,15 @@ router.get("/logout",(req,res)=>{
         res.redirect("/listings");
     });
 });
+
+router.get("/bookings/:userId", async (req, res) => {
+  try {
+    const bookings = await Booking.find({ user: req.params.userId }).populate("listing");
+    res.render("listings/showbooking", { bookings });
+  } catch (err) {
+    res.status(500).send("Error fetching bookings");
+  }
+});
+
 
 module.exports=router;
