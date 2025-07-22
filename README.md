@@ -1,6 +1,6 @@
 # 🏡 RentNRest
 
-**RentNRest** is a full-stack web application inspired by Airbnb that allows users to list, book, and manage short-term rentals.
+**RentNRest** is a full-stack web application that allows users to list, book, and manage short-term rentals.
 
 ---
 
