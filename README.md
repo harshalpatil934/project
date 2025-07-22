@@ -7,7 +7,7 @@
 ## 🚀 Features
 
 - 🧑‍💼 User authentication and role-based access (User & Host)
-- 🏘️ List properties with images, description, price, location
+- 🏘️ List properties with images, description, price, location,Bookings
 - 📅 Booking system with availability check
 - 📊 Admin and Host dashboards
 - 🔍 search and filters
